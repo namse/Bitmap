@@ -1,6 +1,7 @@
 ﻿#include<memory.h>
 #include<Windows.h>
 #include<memory.h>
+#include<list>
 
 BYTE* LoadBMP ( int* width, int* height, long* size, LPCTSTR bmpfile )
 {
@@ -304,4 +305,20 @@ BYTE* CreateTextImage(FONTWEIGHT bold, FONTALIGN align, int fontSize, const wcha
 		DeleteDC(hDC);
 	
 	return pbuf; 
+}
+
+unsigned int GetBitsByPoppingWithNumber(std::list<bool> * bList, int number)
+{
+	unsigned int rt = 0;
+	for(int i=0; i<number; i++)
+	{
+		rt*=2;
+		if(bList->empty() == false)
+		{
+			if( bList->front() == true)
+				rt += 1;
+			bList->pop_front();
+		}
+	}
+	return rt;
 }
